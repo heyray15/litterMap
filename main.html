@@ -17,9 +17,12 @@
    crossorigin=""></script>
    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
    
+   <!-- routing machine -->
+   <link rel="stylesheet" href="leaflet-routing-machine.css"/>
+   <script src="leaflet-routing-machine.js"></script>
    <style>
     #litterMap {
-        height: 100vh;
+        height: 90vh;
        }
     </style>
    
@@ -27,36 +30,16 @@
 
 	<body>
        <div id="litterMap"></div>
+       <div id="routeText"></div>
+       <button id="createRouteBTN" onmouseup="createRoute()">Create</button>
     </body>
     
-    <script>
+    <script src='script.js'></script>
+    <style>
+        #routeText {
+        font-size: 20px;
+        position: absolute; bottom: 0;
+        }
         
-        const map = L.map('litterMap').setView([41.317303, -72.91503], 14);
-        
-        //init map, call open street map tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-        
-        var greenIcon = L.icon({
-           iconUrl: 'recycle.png',
-            iconSize: [32, 32],
-            iconAnchor: [16, 32],
-            popupAnchor: [16, 0]
-            
-        });
-        
-        L.marker( [41.317, -72.915], {icon:greenIcon}).addTo(map);
-        
-        var routeOne = { "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": {}, "geometry": { "type": "LineString", "coordinates": [ [ -72.91528344154358, 41.31741568846929 ], [ -72.91406035423277, 41.31905950728584 ], [ -72.91281580924988, 41.320646881205356 ], [ -72.91089534759521, 41.32321721687991 ], [ -72.9098653793335, 41.32459500398355 ], [ -72.90990829467773, 41.32514288783568 ], [ -72.9101550579071, 41.325328200448965 ], [ -72.90998339653015, 41.32559408284315 ], [ -72.909597158432, 41.3254973984617 ], [ -72.9093611240387, 41.3258196791753 ], [ -72.90897488594055, 41.325731052137954 ], [ -72.90792346000671, 41.32706044504049 ], [ -72.90871739387512, 41.3288570965903 ], [ -72.90861010551453, 41.330355611108956 ], [ -72.90836334228516, 41.33197493482397 ], [ -72.90836334228516, 41.332458307236514 ], [ -72.90805220603943, 41.3333686488753 ], [ -72.90738701820374, 41.33452065589888 ], [ -72.90868520736694, 41.33623654467095 ], [ -72.90778398513794, 41.33416619436925 ], [ -72.90820240974426, 41.333465321576426 ], [ -72.90873885154724, 41.33263554288914 ], [ -72.90862083435059, 41.33107263005767 ], [ -72.90870666503906, 41.330387836849056 ], [ -72.91173219680786, 41.33053285248221 ], [ -72.91404962539673, 41.32568271006677 ], [ -72.91473627090454, 41.32415991646641 ], [ -72.91371703147888, 41.32391014269028 ], [ -72.91678547859192, 41.318898350411395 ], [ -72.91468262672424, 41.31813284981586 ], [ -72.91528344154358, 41.31731093390423 ] ] } } ] };
-        
-        L.geoJSON(routeOne).addTo(map);
-        var coord = [];
-        coord.push(routeOne.features[0].geometry.coordinates);
-
-        
-        var distance = turf.distance(turf.point([ -72.91528344154358, 41.31741568846929 ]), [ -72.91406035423277, 41.31905950728584 ], {units: 'miles'} );
-        
-        console.log(distance);
-        
-        
-    </script>
+    </style>
 </html>
